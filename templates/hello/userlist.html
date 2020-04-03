@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动化运维平台</title>
+</head>
+<body>
+{% extends "hello/base.html" %}
+{% block content %}
+
+<a href="{% url 'hello:create' %}">创建用户</a>
+<!--<a href="./create.html">创建用户</a>-->
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>用户名</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>操作</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.sex }}</td>
+            <td>{{ user.password }}</td>
+            <td><a>修改</a> </td>
+            <td><a>删除</a></td>
+
+        {% endfor %}
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+<body>
+    <h1>用户列表</h1>
+    <a href="{% url 'user:userInfo' %}">创建用户</a>
+    <table border="1">
+        <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户名</th>
+                    <th>密码</th>
+                    <th>性别</th>
+                    <th>修改</th>
+                    <th>删除</th>
+                </tr>
+
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.sex }}</td>
+                <td><a href="{% url 'user:getUser' user.id %}">修改</a> </td>
+                <td><a href="{% url 'user:delUser' user.id %}">删除</a> </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</body>
+</html>

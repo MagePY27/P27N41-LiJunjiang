@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>DevOps</title>
+</head>
+<body>
+<!--<p>{{ name }}</p>-->
+
+<!--<li>{{ books.0 }}</li>-->
+<!--<li>{{ books.1 }}</li>-->
+<!--<li>{{ books.2 }}</li>-->
+
+<!--<div color = blue>hello my name is {{ user.name }} </br>-->
+<!--    my age is {{ user.age }}-->
+<!--</div>-->
+<!--==========================================================================-->
+<!--{% if user %}-->
+<!--    <p> name: {{ user.name }}</p>-->
+<!--{% else %}-->
+<!--    <p> 用户不存在 </p>-->
+<!--{% endif %}-->
+
+<!--{% for book in books %}-->
+<!--    <li>{{ book }}</li>-->
+<!--{% endfor%}-->
+
+<!--{% for user in userlist %}-->
+<!--    <li>{{user.name}} -&ndash;&gt;  {{user.age}}}</li>-->
+<!--{% endfor%}-->
+
+<!--==========================================================================-->
+
+<p>{{ classname}}</p>
+{%for book in books%}
+    <li> {{book}} </li>
+{%endfor%}
+
+<div style="background:wheat;color:bule;">
+    {% for user in userlist %}
+        <li>
+            hello my name is {{user.name}} </br>
+            my age is {{user.age}}
+        </li>
+    {% endfor %}
+</div>
+
+</body>
+</html>
