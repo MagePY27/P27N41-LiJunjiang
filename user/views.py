@@ -21,6 +21,7 @@ def userCreate(request):
     else:
         return render(request, 'user/results.html', {"message": "创建失败"})
 
+
 def getUser(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     date = {
