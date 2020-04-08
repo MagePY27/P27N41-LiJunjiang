@@ -4,8 +4,11 @@ from django.views.generic import View
 
 # Create your views here.
 def userList(request):
+    kw = request.GET.get("kw", "")
     users = User.objects.all()
-    return render(request, 'user/list.html', {'users': users})
+    if kw:
+        users = User.objects.filter(name__icontains=kw)
+    return render(request, 'user/list.html', {'users': users, 'kw': kw})
 
 def userAdd(request):
     msg = {}
