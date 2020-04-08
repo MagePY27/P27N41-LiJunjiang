@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set User </title>
+</head>
+<body>
+    <form action="" method="post">
+
+        用户名：
+        <input type="text" name="name" id="name" value="{{ user.name}}"></br>
+
+        密码：
+        <input type="password" name="password", id="password" value="{{ user.password }}"></br>
+
+        性别：
+        {% if user.sex == 0 %}
+            <input type="radio" name="sex", id="sex" value=0 checked/>男
+            <input type="radio" name="sex", id="sex" value=1 />女</br>
+        {% else %}
+            <input type="radio" name="sex", id="sex" value=0 />男
+            <input type="radio" name="sex", id="sex" value=1 checked/>女</br>
+        {% endif %}
+
+        <input type="submit" value="修改">
+    </form>
+</body>
+</html>

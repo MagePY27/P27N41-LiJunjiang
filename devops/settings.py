@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',  # 管理静态文件的框架
     'polls.apps.PollsConfig',
     'hello.apps.HelloConfig',
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'book.apps.BookConfig',
 ]
 
 MIDDLEWARE = [

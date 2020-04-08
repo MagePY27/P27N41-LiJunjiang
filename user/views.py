@@ -1,57 +1,65 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, Http404
 from .models import User
+from django.views.generic import View
 
 # Create your views here.
 def userList(request):
     users = User.objects.all()
     return render(request, 'user/list.html', {'users': users})
 
-def userInfo(request):
-    return render(request, 'user/userInfo.html')
+def userAdd(request):
+    msg = {}
+    print(request.method)
+    if request.method == "POST":
+        date = request.POST.dict()
+        # print(date)
+        # print(date['sex'], type(date["sex"]))
+        try:
+            User.objects.create(**date)
+            msg = {"code": 0, "result": "添加用户成功"}
+        except:
+            msg = {"code": 1, "errmsg": "添加用户失败"}
+        return render(request, "user/results.html", {'msg': msg})
 
-def userCreate(request):
-    date = {
-        'name': request.POST.get("name"),
-        'password': request.POST.get("password"),
-        'sex': int(request.POST.get("sex")),
-    }
-    if User.objects.create(**date):
-    # print(user.id, type(user.id))
-        return render(request, 'user/results.html', {"message": "创建成功"})
-    else:
-        return render(request, 'user/results.html', {"message": "创建失败"})
-
-def getUser(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
-    date = {
-        'id': user.id,
-        'name': user.name,
-        'password': user.password,
-        'sex': user.sex
-    }
-    return render(request, 'user/getUser.html', date)
-
-def resetUser(request, user_id):
-    date = {
-        'name': request.POST.get("name"),
-        'password': request.POST.get("password"),
-        'sex': request.POST.get("sex")
-    }
-    print(user_id, date)
-    if User.objects.filter(id=user_id).update(**date):
-        return render(request, 'user/results.html', {"message": "修改成功"})
-    else:
-        return render(request, 'user/results.html', {"message": "修改失败"})
-
-def delUser(request, user_id):
-    if User.objects.filter(id=user_id).delete():
-        # if not User.objects.f
-        return render(request, 'user/results.html', {'message': '删除成功'})
-    else:
-        return render(request, 'user/results.html', {'message': '删除失败'})
+    return render(request, "user/useradd.html")
 
 
+def setUser(request, **kwargs):
+    msg = {}
+    pk = kwargs.get("user_id")
+    print(pk)
+    try:
+        user = User.objects.get(pk=pk)
+        print(user)
+    except User.DoesNotExist:
+        raise Http404
 
-def results(request, message):
-    # user = get_object_or_404(User, pk=userId)
-    return render(request, 'user/results.html', {"message":message})
+    if request.method == 'POST':
+        date = request.POST.dict()
+        try:
+            User.objects.filter(pk=pk).update(**date)
+            msg = {'code': 0, 'result': "修改成功"}
+        except:
+            msg = {'code': 1, 'errmsg': "修改失败"}
+        return render(request, "user/results.html", {'msg': msg})
+
+    return render(request, "user/set.html", {'user': user, "msg": msg})
+
+def delUser(request, **kwargs):
+    msg = {}
+    print(kwargs)
+    pk = kwargs.get("user_id")
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        raise Http404
+
+    if request.method == "POST":
+        try:
+            User.objects.filter(pk=pk).delete()
+            msg = {'code': 0, "result": "删除用户成功"}
+        except:
+            msg = {'code': 1, "errmsg": "删除用户失败"}
+        return render(request, "user/results.html", {'msg': msg})
+
+    return render(request, "user/delete.html", {"user": user, "msg": msg})

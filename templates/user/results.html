@@ -5,8 +5,13 @@
     <title>Results</title>
 </head>
 <body>
-    <p>{{ message }}</p>
-    <a href="{% url 'user:userInfo' %}">创建用户</a></br>
-    <a href="{% url 'user:userList' %}">返回用户列表</a>
+    {% if msg.code == 0 %}
+        <p style="color: green">{{ msg.result }}</p>
+    {% else %}
+        <p style="color: red">{{ msg.errmsg }}</p>
+    {% endif %}
+
+    <a href="{% url 'user:useradd' %}">创建用户</a></br>
+    <a href="{% url 'user:userlist' %}">返回用户列表</a>
 </body>
 </html>

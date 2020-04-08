@@ -3,11 +3,9 @@ from . import views
 
 app_name = "user"
 urlpatterns = [
-    path('', views.userList, name='userList'),
-    path('create/', views.userCreate, name="userCreate"),
-    path('results/', views.results, name='results'),
-    path('userInfo/', views.userInfo, name="userInfo"),
-    path('<int:user_id>/getUser', views.getUser, name="getUser"),
-    path('<int:user_id>/resetUser', views.resetUser, name="resetUser"),
-    path('<int:user_id>/delUseer', views.delUser, name='delUser'),
+    path('', views.userList, name='index'),
+    path('userlist', views.userList, name='userlist'),
+    path('useradd/', views.userAdd, name="useradd"),
+    path('<int:user_id>/resetUser', views.setUser, name="setuser"),
+    path('<int:user_id>/delUseer/', views.delUser, name='deluser'),
 ]

@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>用户列表</h1>
-    <a href="{% url 'user:userInfo' %}">创建用户</a>
+    <a href="{% url 'user:useradd' %}">创建用户</a>
     <table border="1">
         <thead>
                 <tr>
@@ -25,9 +25,15 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.password }}</td>
-                <td>{{ user.sex }}</td>
-                <td><a href="{% url 'user:getUser' user.id %}">修改</a> </td>
-                <td><a href="{% url 'user:delUser' user.id %}">删除</a> </td>
+                {% if user.sex == 0 %}
+                    <td>男</td>
+                {% elif user.sex == 1 %}
+                    <td>女</td>
+                {% else %}
+                    <td>未知</td>
+                {% endif %}
+                <td><a href="{% url 'user:setuser' user.id %}">修改</a> </td>
+                <td><a href="{% url 'user:deluser' user.id %}">删除</a> </td>
             </tr>
             {% endfor %}
 

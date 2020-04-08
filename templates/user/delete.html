@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+    <h1>是否删除用户 {{ user.name }}</h1>
+    <form method="post">
+        <button type="submit">确定</button>
+        <button><a href="{% url 'user:userlist' %}">取消</a></button>
+    </form>
+
+</body>
+</html>

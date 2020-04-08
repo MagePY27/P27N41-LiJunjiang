@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class User(models.Model):
     SEX = (
-        ('0', '男'),
-        ("1", "女")
+        (0, '男'),
+        (1, "女")
     )
 
     name = models.CharField(max_length=20, help_text="用户名")
